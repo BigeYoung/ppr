@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pps
+  template:
+    metadata:
+      labels:
+        app: pps
+    spec:
+      containers:
+      - name: pps
+        image: registry.cn-hangzhou.aliyuncs.com/scut-cpps/pps:release
+        imagePullPolicy: Always
+        command: [ "python3", "-u", "main.py" ]
