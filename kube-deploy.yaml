@@ -1,19 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pps
+  name: ppr
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pps
+      app: ppr
   template:
     metadata:
       labels:
-        app: pps
+        app: ppr
     spec:
       containers:
-      - name: pps
-        image: registry.cn-hangzhou.aliyuncs.com/scut-cpps/pps:release
+      - name: ppr
+        image: registry.cn-hangzhou.aliyuncs.com/scut-cpps/ppr:release
         imagePullPolicy: Always
         command: [ "python3", "-u", "main.py" ]
+        env:
+          - name: ZEEBE_GATEWAY
+            value: "zeebe-zeebe-gateway:26500"
+          - name: JENA_SERVER
+            value: "jena_jena:26500"
+          - name: ZEEBE_GATEWAY
+            value: zeebe-zeebe-gateway:26500
+          - name: JENA_SERVER
+            value: jena_jena:3030
+          - name: MINIO_SERVER
+            value: minio:30002
+          - name: MYSQL_SERVER
+            value: mysql:30390
+          - name: MYSQL_USER
+            value: VV0JquD7JL
+          - name: MYSQL_PASSWD
+            value: 2ZEzvefSKm
+          - name: MYSQL_DB
+            value: cpps_db
+              
