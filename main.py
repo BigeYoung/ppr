@@ -147,7 +147,7 @@ def PPR_main():
 
 with grpc.insecure_channel(ZEEBE_GATEWAY) as channel:
     stub = gateway_pb2_grpc.GatewayStub(channel)
-    for jobResponse in stub.ActivateJobs(gateway_pb2.ActivateJobsRequest(type = 'payment-service', worker = 'ppr-client', timeout = 1000, amount = 32)):
+    for jobResponse in stub.ActivateJobs(gateway_pb2.ActivateJobsRequest(type = 'payment-service', worker = 'ppr-client', timeout = 1000, maxJobsToActivate = 32)):
         for job in jobResponse.jobs:
             print(job)
             PPR_main()
